@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ | 株式会社山旅旅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #2c4a32;
+    --moss: #3d6147;
+    --sage: #5a8a64;
+    --snow: #f4f1eb;
+    --gold: #b8924a;
+    --ink: #1a1a18;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    background: var(--snow);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--forest);
+    padding: 0 8vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .site-logo { font-size: 1.2rem; font-weight: 900; color: #f0ede6; letter-spacing: 0.05em; }
+  .header-back {
+    display: flex; align-items: center; gap: 6px;
+    color: #b8d4bc; font-size: 0.8rem;
+    transition: color 0.2s;
+  }
+  .header-back:hover { color: #fff; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: #2a3d2e;
+    padding: 60px 8vw 50px;
+  }
+  .page-hero-en {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #e8c97a; font-size: 0.85rem;
+    letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;
+  }
+  .page-hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; color: #f0ede6; line-height: 1.15;
+  }
+  .page-hero-sub {
+    margin-top: 1rem; font-size: 0.9rem;
+    color: #b8d4bc; line-height: 1.8; max-width: 50ch;
+  }
+
+  /* ── MAIN ── */
+  .main-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 8vw 100px;
+  }
+
+  /* category tags */
+  .category-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 40px;
+  }
+  .tag {
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    border: 2px solid transparent;
+  }
+  .tag.active   { background: var(--forest); color: #fff; border-color: var(--forest); }
+  .tag.inactive { background: #fff; color: var(--moss); border-color: rgba(61,97,71,0.3); }
+  .tag.inactive:hover { border-color: var(--forest); }
+
+  /* form */
+  .form-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 44px 40px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  }
+  .form-group { margin-bottom: 28px; }
+  .form-label {
+    display: block; font-size: 0.82rem;
+    font-weight: 700; color: var(--moss);
+    margin-bottom: 8px; letter-spacing: 0.04em;
+  }
+  .required-badge {
+    display: inline-block; background: #c0392b;
+    color: #fff; font-size: 0.65rem; font-weight: 700;
+    padding: 1px 6px; border-radius: 3px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .optional-badge {
+    display: inline-block; background: #888;
+    color: #fff; font-size: 0.65rem; font-weight: 700;
+    padding: 1px 6px; border-radius: 3px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid #d8e4d9;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--ink);
+    background: #fafbfa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--moss);
+    box-shadow: 0 0 0 3px rgba(61,97,71,0.1);
+    background: #fff;
+  }
+  .form-textarea { resize: vertical; min-height: 160px; line-height: 1.7; }
+  .form-select { cursor: pointer; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .privacy-box {
+    background: #f5f8f5; border: 1px solid #d8e4d9;
+    border-radius: 6px; padding: 16px 18px;
+    font-size: 0.8rem; color: #555; line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .privacy-box a { color: var(--moss); text-decoration: underline; }
+
+  .checkbox-label {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.85rem; color: #333;
+    cursor: pointer; margin-bottom: 28px;
+  }
+  .checkbox-label input[type="checkbox"] {
+    margin-top: 2px; accent-color: var(--forest);
+    width: 16px; height: 16px; flex-shrink: 0; cursor: pointer;
+  }
+
+  .submit-btn {
+    width: 100%; padding: 15px;
+    background: var(--forest); color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.06em;
+  }
+  .submit-btn:hover { background: #1e3422; transform: translateY(-1px); }
+  .submit-btn:disabled { background: #aaa; cursor: not-allowed; transform: none; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none; text-align: center; padding: 60px 20px;
+  }
+  .success-screen.show { display: block; }
+  .success-icon {
+    width: 72px; height: 72px;
+    background: var(--forest); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .success-icon svg { width: 36px; height: 36px; }
+  .success-title { font-size: 1.5rem; font-weight: 900; color: var(--forest); margin-bottom: 12px; }
+  .success-msg { font-size: 0.9rem; color: #555; line-height: 1.9; }
+  .back-btn {
+    display: inline-block; margin-top: 32px;
+    padding: 12px 28px; background: var(--forest); color: #fff;
+    border-radius: 6px; font-weight: 700; font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: #1e3422; }
+
+  /* ── COMMON FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    padding: 32px 8vw;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 20px;
+  }
+  .footer-links {
+    display: flex; align-items: center;
+    gap: 0; flex-wrap: wrap; justify-content: center;
+  }
+  .footer-links a {
+    font-size: 0.82rem; color: rgba(240,237,230,0.7);
+    padding: 4px 20px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s; white-space: nowrap;
+  }
+  .footer-links a:last-child { border-right: none; }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy { font-size: 0.72rem; color: rgba(200,216,202,0.3); letter-spacing: 0.08em; }
+
+  @media (max-width: 600px) {
+    .form-card { padding: 28px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="yamatabitabi-company-v4.html" class="site-logo">山旅旅</a>
+  <a href="yamatabitabi-company-v4.html" class="header-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    会社概要に戻る
+  </a>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="page-hero-en">Contact Us</span>
+  <h1 class="page-hero-title">お問い合わせ</h1>
+  <p class="page-hero-sub">OEM・プロモーション支援・掲載などのご依頼、<br>その他ご不明な点はお気軽にお問い合わせください。</p>
+</div>
+
+<!-- MAIN -->
+<div class="main-container">
+
+  <!-- カテゴリー選択 -->
+  <div class="category-tags" id="categoryTags">
+    <span class="tag active" data-val="OEM依頼">OEM依頼</span>
+    <span class="tag inactive" data-val="プロモーション支援">プロモーション支援</span>
+    <span class="tag inactive" data-val="掲載・メディア">掲載・メディア</span>
+    <span class="tag inactive" data-val="商品・ショップ">商品・ショップ</span>
+    <span class="tag inactive" data-val="その他">その他</span>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card" id="formCard">
+    <div class="form-group">
+      <label class="form-label">お問い合わせ種別<span class="required-badge">必須</span></label>
+      <select class="form-select" id="categorySelect">
+        <option value="OEM依頼">OEM依頼</option>
+        <option value="プロモーション支援">プロモーション支援</option>
+        <option value="掲載・メディア">掲載・メディア</option>
+        <option value="商品・ショップ">商品・ショップ</option>
+        <option value="その他">その他</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">お名前<span class="required-badge">必須</span></label>
+        <input type="text" class="form-input" id="name" placeholder="山田 太郎">
+      </div>
+      <div class="form-group">
+        <label class="form-label">会社名 / 屋号<span class="optional-badge">任意</span></label>
+        <input type="text" class="form-input" id="company" placeholder="株式会社〇〇">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">メールアドレス<span class="required-badge">必須</span></label>
+      <input type="email" class="form-input" id="email" placeholder="example@email.com">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">電話番号<span class="optional-badge">任意</span></label>
+      <input type="tel" class="form-input" id="tel" placeholder="03-0000-0000">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">お問い合わせ内容<span class="required-badge">必須</span></label>
+      <textarea class="form-textarea" id="message" placeholder="ご依頼の内容・ご質問などをご記入ください。&#10;&#10;（例：登山ウェアのOEMについてご相談したい。ロット数は〇〇点を予定しており…）"></textarea>
+    </div>
+
+    <div class="privacy-box">
+      ご入力いただいた個人情報は、お問い合わせへの回答・連絡のみに使用し、
+      <a href="#">プライバシーポリシー</a>に基づき適切に管理いたします。
+    </div>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="privacyCheck">
+      プライバシーポリシーに同意する
+    </label>
+
+    <button class="submit-btn" id="submitBtn" disabled onclick="handleSubmit()">送信する</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="success-title">送信が完了しました</div>
+    <p class="success-msg">
+      お問い合わせありがとうございます。<br>
+      内容を確認のうえ、通常2〜3営業日以内にご連絡いたします。<br>
+      しばらくお待ちください。
+    </p>
+    <a href="yamatabitabi-company-v4.html" class="back-btn">会社概要ページに戻る</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://yamatabitabi.com/service">企業情報</a>
+    <a href="yamatabitabi-terms.html">利用規約</a>
+    <a href="yamatabitabi-privacy.html">プライバシーポリシー</a>
+    <a href="yamatabitabi-contact.html">お問い合わせ</a>
+  </div>
+  <span class="footer-copy">© Yamatabitabi Inc. All rights reserved.</span>
+</footer>
+
+<script>
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzHVmWb6QZxPM2rRJ-6SBza8KI02SVHzXb2V-ZxdfUWgS_EWcM2p2dJzveT72trxBtMoA/exec';
+
+  // カテゴリータグとselectの連動
+  const tags = document.querySelectorAll('#categoryTags .tag');
+  const sel  = document.getElementById('categorySelect');
+
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      tags.forEach(t => { t.classList.remove('active'); t.classList.add('inactive'); });
+      tag.classList.remove('inactive'); tag.classList.add('active');
+      sel.value = tag.dataset.val;
+    });
+  });
+  sel.addEventListener('change', () => {
+    tags.forEach(t => {
+      t.classList.remove('active'); t.classList.add('inactive');
+      if (t.dataset.val === sel.value) { t.classList.remove('inactive'); t.classList.add('active'); }
+    });
+  });
+
+  // プライバシー同意でボタン活性化
+  const checkbox  = document.getElementById('privacyCheck');
+  const submitBtn = document.getElementById('submitBtn');
+  checkbox.addEventListener('change', () => {
+    submitBtn.disabled = !checkbox.checked;
+  });
+
+  // 送信処理
+  async function handleSubmit() {
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      alert('お名前・メールアドレス・お問い合わせ内容は必須です。');
+      return;
+    }
+
+    // ボタンをローディング状態に
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+
+    const payload = {
+      category: document.getElementById('categorySelect').value,
+      name,
+      company: document.getElementById('company').value.trim(),
+      email,
+      tel:     document.getElementById('tel').value.trim(),
+      message
+    };
+
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // no-corsのためレスポンス内容は取得できないが送信は完了している
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('categoryTags').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      alert('送信中にエラーが発生しました。時間をおいて再度お試しください。');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '送信する';
+    }
+  }
+</script>
+</body>
+</html>

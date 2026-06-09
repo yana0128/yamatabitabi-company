@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社概要 | 株式会社山旅旅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #2c4a32;
+    --moss: #3d6147;
+    --sage: #5a8a64;
+    --mist: #c8d8ca;
+    --snow: #f4f1eb;
+    --stone: #7a6a58;
+    --gold: #b8924a;
+    --ink: #1a1a18;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--snow);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: #fff;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(90,138,100,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(184,146,74,0.05) 0%, transparent 60%);
+  }
+  .mountain-silhouette {
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; opacity: 0.07;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 10vh 8vw;
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--stone);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    letter-spacing: 0.15em; margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-weight: 900;
+    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    color: var(--forest);
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--moss);
+    letter-spacing: 0.05em; margin-bottom: 2.5rem;
+  }
+  .hero-tagline {
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    color: #3a5540;
+    letter-spacing: 0.06em; line-height: 2;
+    max-width: 36ch;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.2rem;
+    font-weight: 500;
+  }
+  .hero-scroll {
+    position: relative; z-index: 2;
+    padding: 2.5rem 8vw;
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--sage); font-size: 0.75rem; letter-spacing: 0.2em;
+    animation: fadeIn 2s ease 0.8s both;
+  }
+  .scroll-line {
+    width: 60px; height: 1px; background: var(--sage);
+    animation: extendLine 1.5s ease 1s both;
+  }
+
+  /* ── MISSION ── */
+  .mission {
+    background: #2a3d2e;
+    padding: 100px 8vw;
+    position: relative; overflow: hidden;
+  }
+  .mission::before {
+    content: 'MISSION';
+    position: absolute; right: -2%; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    color: rgba(255,255,255,0.04);
+    letter-spacing: 0.3em; white-space: nowrap;
+    pointer-events: none;
+  }
+  .mission-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; max-width: 1100px;
+  }
+  .mission-card {
+    background: rgba(255,255,255,0.08);
+    padding: 2.5rem 2rem;
+    border-top: 2px solid rgba(184,146,74,0.6);
+    border-radius: 4px;
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .mission-card.visible { opacity: 1; transform: translateY(0); }
+  .mission-card:nth-child(2) { transition-delay: 0.15s; }
+  .mission-card:nth-child(3) { transition-delay: 0.3s; }
+  .mission-label {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #e8c97a;
+    font-size: 1rem; letter-spacing: 0.2em; margin-bottom: 1rem;
+  }
+  .mission-text {
+    color: #f0ede6;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700; line-height: 1.7;
+  }
+  .mission-detail {
+    margin-top: 1rem;
+    color: #b8d4bc;
+    font-size: 0.85rem; line-height: 2; font-weight: 400;
+  }
+
+  /* ── COMPANY INFO ── */
+  .company-section {
+    padding: 120px 8vw;
+    background: var(--snow);
+  }
+  .section-header {
+    margin-bottom: 5rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .section-header.visible { opacity: 1; transform: translateY(0); }
+  .section-en {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    color: var(--gold); letter-spacing: 0.2em;
+    display: block; margin-bottom: 0.5rem;
+  }
+  .section-ja {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800; color: var(--forest); line-height: 1.2;
+  }
+  .company-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .info-table { width: 100%; border-collapse: collapse; }
+  .info-table tr {
+    border-bottom: 1px solid rgba(107,143,113,0.2);
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .info-table tr.visible { opacity: 1; transform: translateX(0); }
+  .info-table td { padding: 1.2rem 0; font-size: 0.88rem; vertical-align: top; }
+  .info-table td:first-child {
+    color: var(--moss); font-weight: 700;
+    white-space: nowrap; width: 8em; letter-spacing: 0.05em;
+  }
+  .info-table td:last-child { color: var(--ink); line-height: 1.7; padding-left: 1rem; }
+  .about-text { max-width: 600px; }
+  .about-paragraph { font-size: 0.9rem; color: #3a4e3d; line-height: 2.1; margin-bottom: 1.5rem; }
+  .about-highlight {
+    font-size: 1.4rem; font-weight: 700; color: var(--forest);
+    line-height: 1.6; border-left: 3px solid var(--gold);
+    padding-left: 1.5rem; margin-bottom: 2.5rem;
+  }
+
+  /* ── SERVICES ── */
+  .services-section {
+    padding: 120px 8vw;
+    background: #2a3d2e;
+    position: relative; overflow: hidden;
+  }
+  .services-section .section-ja { color: #f0ede6; }
+  .services-section .section-en { color: #e8c97a; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px; margin-top: 4rem;
+  }
+  .service-item {
+    background: rgba(255,255,255,0.07);
+    padding: 2rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+  .service-item.visible { opacity: 1; transform: translateY(0); }
+  .service-item:hover {
+    border-color: rgba(232,201,122,0.6);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .service-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem; color: #e8c97a;
+    margin-bottom: 0.8rem; display: block;
+    opacity: 0.9;
+  }
+  .service-title {
+    font-size: 1rem; font-weight: 700;
+    color: #f0ede6; line-height: 1.5; margin-bottom: 0.5rem;
+  }
+  .service-desc {
+    font-size: 0.8rem; color: #b8d4bc; line-height: 1.9;
+  }
+
+  /* service link buttons */
+  .service-links { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .btn-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px;
+    border-radius: 4px;
+    font-size: 0.78rem; font-weight: 700;
+    font-family: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-link:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-green  { background: #4a7c59; color: #fff; }
+  .btn-red    { background: #cc0000; color: #fff; }
+  .btn-ig     { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+  .btn-fb     { background: #1877f2; color: #fff; }
+  .btn-x      { background: #000; color: #fff; }
+  .btn-shop   { background: #b8924a; color: #fff; }
+  .btn-inquiry{ background: rgba(255,255,255,0.15); color: #f0ede6; border: 1px solid rgba(255,255,255,0.3); }
+  .btn-inquiry:hover { background: rgba(255,255,255,0.25); }
+
+  /* SNS icon SVGs inline */
+  .icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── SNS SECTION ── */
+  .sns-section {
+    padding: 80px 8vw;
+    background: var(--snow);
+    border-top: 1px solid rgba(107,143,113,0.15);
+  }
+  .sns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 2.5rem;
+  }
+  .sns-card {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid transparent;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .sns-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+  .sns-card svg, .sns-card img { width: 32px; height: 32px; flex-shrink: 0; }
+
+  .sns-web   { background: #f0f7f1; color: var(--forest); border-color: #c6ddc9; }
+  .sns-web:hover { border-color: var(--forest); }
+  .sns-yt    { background: #fff0f0; color: #cc0000; border-color: #ffcaca; }
+  .sns-yt:hover { border-color: #cc0000; }
+  .sns-ig    { background: #fff0f6; color: #c13584; border-color: #f5c6de; }
+  .sns-ig:hover { border-color: #c13584; }
+  .sns-x     { background: #f5f5f5; color: #000; border-color: #ddd; }
+  .sns-x:hover { border-color: #000; }
+  .sns-fb    { background: #f0f4ff; color: #1877f2; border-color: #c0d4fc; }
+  .sns-fb:hover { border-color: #1877f2; }
+  .sns-tiktok { background: #f0fafa; color: #010101; border-color: #b8e8ea; }
+  .sns-tiktok:hover { border-color: #69c9d0; }
+  .sns-shop  { background: #fdf7ee; color: #8a6330; border-color: #e8d4b0; }
+  .sns-shop:hover { border-color: var(--gold); }
+
+  /* ── COMMON FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    padding: 32px 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(240,237,230,0.7);
+    padding: 4px 20px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .footer-links a:last-child { border-right: none; }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(200,216,202,0.3);
+    letter-spacing: 0.08em;
+  }
+  @media (max-width: 640px) {
+    .sns-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes extendLine { from{width:0} to{width:60px} }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .mission-grid { grid-template-columns: 1fr; }
+    .company-layout { grid-template-columns: 1fr; gap: 50px; }
+    .services-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="mountain-silhouette" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <path fill="#2c4a32" d="M0,320 L0,200 L180,80 L360,160 L480,40 L620,180 L760,60 L900,150 L1050,30 L1200,140 L1320,80 L1440,120 L1440,320 Z"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Company Profile — 株式会社山旅旅</p>
+    <h1 class="hero-title">山<span>旅</span>旅</h1>
+    <p class="hero-sub">Yamatabitabi Inc.</p>
+    <p class="hero-tagline">
+      登山・山あそびがもっと楽しくなる<br>
+      コンテンツを発信するアウトドアメディア。<br>
+      山と人をつなぐ、あらゆる接点をつくる。
+    </p>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-grid">
+    <div class="mission-card">
+      <p class="mission-label">Mission</p>
+      <p class="mission-text">登山・山あそびがもっと楽しくなるコンテンツ発信</p>
+    </div>
+    <div class="mission-card">
+      <p class="mission-label">Vision</p>
+      <p class="mission-text">100年経っても古びないコンテンツ作り</p>
+      <p class="mission-detail">
+        買う前に見る、行く前に見る<br>
+        インフラとしての情報基盤を構築する<br>
+        アクティビティに長けた方々に発見をもたらす
+      </p>
+    </div>
+    <div class="mission-card">
+      <p class="mission-label">Value</p>
+      <p class="mission-text">アウトドア業界を盛り上げる</p>
+      <p class="mission-detail">
+        山好きの安心と利益を最優先する<br>
+        ブランドと登山者の橋渡し役として<br>
+        信頼性と専門性を追求する
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY INFO -->
+<section class="company-section">
+  <div class="section-header">
+    <span class="section-en">Company Information</span>
+    <h2 class="section-ja">会社概要</h2>
+  </div>
+  <div class="company-layout">
+    <div>
+      <table class="info-table">
+        <tr><td>商号</td><td>株式会社 山旅旅</td></tr>
+        <tr><td>代表者</td><td>代表取締役社長　柳原 裕美</td></tr>
+        <tr><td>創業</td><td>2015年8月11日</td></tr>
+        <tr><td>設立</td><td>2022年8月1日</td></tr>
+        <tr><td>資本金</td><td>800万円</td></tr>
+        <tr><td>従業員数</td><td>2名（2024年10月1日時点）</td></tr>
+        <tr><td>本社所在地</td><td>〒135-0004<br>東京都江東区森下3丁目13-13-1402</td></tr>
+        <tr><td>直営店</td><td>清澄白河 清洲寮内（山旅ブランド直営店）</td></tr>
+        <tr><td>主要取引銀行</td><td>三菱UFJ銀行</td></tr>
+      </table>
+    </div>
+    <div class="about-text">
+      <p class="about-highlight">山と人の距離を、もっと近くする。</p>
+      <p class="about-paragraph">山旅旅（やまたびたび）は、登山・トレイルラン・山スキーをはじめとするアウトドアアクティビティを楽しむすべての人に向けた、総合アウトドアメディアカンパニーです。</p>
+      <p class="about-paragraph">2015年の創業以来、ウェブマガジンを中心に、YouTube・Instagram・X・Facebook・TikTokなど多様なプラットフォームでコンテンツを発信してきました。</p>
+      <p class="about-paragraph">自社ブランド「山旅」のECサイト・直営店運営、登山道具・アウトドアウェアのOEM事業、各ブランドのメディア露出支援など、メディアにとどまらない多角的な事業を展開しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-header">
+    <span class="section-en">Business</span>
+    <h2 class="section-ja">事業内容</h2>
+  </div>
+  <div class="services-grid">
+
+    <!-- 01 Webマガジン -->
+    <div class="service-item">
+      <span class="service-num">01</span>
+      <p class="service-title">山旅旅 Webマガジン</p>
+      <p class="service-desc">登山ウェア・ギアのレビューから登山スポット情報、ハウツーまで、山に関する総合情報メディアの運営</p>
+      <div class="service-links">
+        <a href="https://yamatabitabi.com/" target="_blank" class="btn-link btn-green">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+          Webマガジンを見る
+        </a>
+      </div>
+    </div>
+
+    <!-- 02 YouTube -->
+    <div class="service-item">
+      <span class="service-num">02</span>
+      <p class="service-title">YouTubeチャンネル運営</p>
+      <p class="service-desc">山旅旅公式YouTubeチャンネルの企画・制作・配信</p>
+      <div class="service-links">
+        <a href="https://www.youtube.com/@yamatabitabi" target="_blank" class="btn-link btn-red">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          YouTubeチャンネルへ
+        </a>
+      </div>
+    </div>
+
+    <!-- 03 SNS -->
+    <div class="service-item">
+      <span class="service-num">03</span>
+      <p class="service-title">SNS運営</p>
+      <p class="service-desc">Instagram・X・Facebookの公式アカウントを通じた情報発信とコミュニティ形成</p>
+      <div class="service-links">
+        <a href="https://www.instagram.com/yamatabitabi/" target="_blank" class="btn-link btn-ig">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.265.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608C4.516 2.497 5.783 2.226 7.15 2.163 8.415 2.105 8.795 2.163 12 2.163zm0-2.163C8.756 0 8.332.013 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.013 8.332 0 8.756 0 12c0 3.244.013 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.987 8.756 24 12 24s3.668-.013 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.059-1.28.072-1.704.072-4.948s-.013-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.013 15.244 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/yamatabitabi" target="_blank" class="btn-link btn-fb">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://twitter.com/yamatabitabi" target="_blank" class="btn-link btn-x">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+      </div>
+    </div>
+
+    <!-- 04 山旅ブランド -->
+    <div class="service-item">
+      <span class="service-num">04</span>
+      <p class="service-title">山旅ブランド運営</p>
+      <p class="service-desc">自社アウトドアブランド「山旅」のECサイト運営および清澄白河（清洲寮）の直営店舗運営</p>
+      <div class="service-links">
+        <a href="https://store.yamatabi.shop/" target="_blank" class="btn-link btn-shop">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          オンラインショップへ
+        </a>
+      </div>
+    </div>
+
+    <!-- 05 OEM -->
+    <div class="service-item">
+      <span class="service-num">05</span>
+      <p class="service-title">登山道具・ウェア OEM</p>
+      <p class="service-desc">登山道具・登山ウェアの企画・製造・卸・OEM受託サービス</p>
+      <div class="service-links">
+        <a href="yamatabitabi-contact.html" class="btn-link btn-inquiry">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          お問い合わせ
+        </a>
+      </div>
+    </div>
+
+    <!-- 06 プロモーション -->
+    <div class="service-item">
+      <span class="service-num">06</span>
+      <p class="service-title">ブランドプロモーション支援</p>
+      <p class="service-desc">各社ブランドの製品をWebマガジン・動画・SNSで紹介。道具紹介コンテンツの企画・制作・拡散支援</p>
+      <div class="service-links">
+        <a href="yamatabitabi-contact.html" class="btn-link btn-inquiry">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          お問い合わせ
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SNS -->
+<section class="sns-section">
+  <div class="section-header" style="margin-bottom:0">
+    <span class="section-en">Social Media</span>
+    <h2 class="section-ja" style="font-size:clamp(1.3rem,3vw,2rem)">公式SNS・チャンネル</h2>
+  </div>
+  <div class="sns-grid">
+
+    <a href="https://yamatabitabi.com" target="_blank" class="sns-card sns-web">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+      Webマガジン
+    </a>
+
+    <a href="https://www.youtube.com/@yamatabitabi" target="_blank" class="sns-card sns-yt">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+      YouTube
+    </a>
+
+    <a href="https://www.instagram.com/yamatabitabi/" target="_blank" class="sns-card sns-ig">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.265.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608C4.516 2.497 5.783 2.226 7.15 2.163 8.415 2.105 8.795 2.163 12 2.163zm0-2.163C8.756 0 8.332.013 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.013 8.332 0 8.756 0 12c0 3.244.013 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.987 8.756 24 12 24s3.668-.013 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.059-1.28.072-1.704.072-4.948s-.013-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.013 15.244 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Instagram
+    </a>
+
+    <a href="https://twitter.com/yamatabitabi" target="_blank" class="sns-card sns-x">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X (Twitter)
+    </a>
+
+    <a href="https://www.facebook.com/yamatabitabi" target="_blank" class="sns-card sns-fb">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      Facebook
+    </a>
+
+    <a href="https://www.tiktok.com/@yamatabitabi" target="_blank" class="sns-card sns-tiktok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      TikTok
+    </a>
+
+    <a href="https://store.yamatabi.shop" target="_blank" class="sns-card sns-shop">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      オンラインショップ
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://yamatabitabi.com/service">企業情報</a>
+    <a href="yamatabitabi-terms.html">利用規約</a>
+    <a href="yamatabitabi-privacy.html">プライバシーポリシー</a>
+    <a href="yamatabitabi-contact.html">お問い合わせ</a>
+  </div>
+  <span class="footer-copy">© Yamatabitabi Inc. All rights reserved.</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.mission-card, .section-header, .about-text, .service-item').forEach(el => observer.observe(el));
+
+  const tableObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('tr').forEach((row, i) => {
+          setTimeout(() => row.classList.add('visible'), i * 80);
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.info-table').forEach(t => tableObserver.observe(t));
+</script>
+</body>
+</html>
