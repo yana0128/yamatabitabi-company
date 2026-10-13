@@ -95,7 +95,7 @@
   function renderSns(list) {
     document.title = 'SNS・ウェブマガジン|山旅旅';
     var h = '<p class="eyebrow">FOLLOW</p><h1>山旅旅をもっと身近に</h1>' +
-      '<p class="lead">山の記事・動画・入荷のお知らせを、好きな場所で受け取れます。</p>';
+      '<p class="lead">山の記事や動画を、好きな場所でどうぞ。</p>';
     list.forEach(function (s) {
       h += '<a class="row" data-src="sns-' + esc(s.id) + '" href="' + esc(safe(s.url)) + '">' +
         '<span class="icon" style="background:' + esc(s.color || '#2F4F3E') + '">' + esc(s.mark || s.name.charAt(0)) + '</span>' +
