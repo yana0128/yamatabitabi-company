@@ -1,31 +1,107 @@
 {
-  "updated": "2026-10-13",
+  "updated": "2026-10-15",
   "links": {
-    "2611F01": { "url": "https://store.yamatabi.shop/items/145626513" },
-    "2611F02": { "url": "https://store.yamatabi.shop/items/125281907" },
-    "2611F03": { "url": "https://yamatabitabi.com/archives/195357" },
-    "2611F04": { "url": "https://store.yamatabi.shop/items/94805871" },
-    "2611B01": { "url": "https://youtu.be/7AxsYQSUask" },
-    "2611B03": { "url": "https://store.yamatabi.shop/" },
+    "2611F01": {
+      "url": "https://store.yamatabi.shop/items/145626513"
+    },
+    "2611F02": {
+      "url": "https://store.yamatabi.shop/items/125281907"
+    },
+    "2611F03": {
+      "url": "https://yamatabitabi.com/archives/195357"
+    },
+    "2611F04": {
+      "url": "https://store.yamatabi.shop/items/94805871"
+    },
+    "2611B01": {
+      "url": "https://youtu.be/7AxsYQSUask"
+    },
+    "2611B03": {
+      "url": "https://store.yamatabi.shop/"
+    },
     "2611B02": {
       "page": "ranking",
       "title": "先月の人気商品",
-      "lead": "オンラインストアで先月よく選ばれた4つです。",
+      "lead": "オンラインストアで先月よく選ばれた商品です。",
       "items": [
-        { "name": "メモリ付き登山用ウォータボトル500ml", "price": "¥1,190(税込)", "url": "https://store.yamatabi.shop/items/110174141", "image": "https://baseec-img-mng.akamaized.net/images/item/origin/ac77626fabc1e90b15bda329f101de9f.png?imformat=generic&q=90&im=Resize,width=300,type=normal" },
-        { "name": "ライトウェイトサンシェード(ネックカバー)", "price": "¥2,990(税込)", "url": "https://store.yamatabi.shop/items/75818967", "image": "https://baseec-img-mng.akamaized.net/images/item/origin/f9c6ef085e8f1e52870fc5a5e6eed306.png?imformat=generic&q=90&im=Resize,width=300,type=normal" },
-        { "name": "ラインロックV", "price": "¥290(税込)", "url": "https://store.yamatabi.shop/items/87385290", "image": "https://baseec-img-mng.akamaized.net/images/item/origin/1addc7cef66223724d46396e27938351.png?imformat=generic&q=90&im=Resize,width=300,type=normal" },
-        { "name": "Air Float 1P シングルウォールテント", "price": "¥51,291(税込)", "url": "https://store.yamatabi.shop/items/156603748", "image": "https://baseec-img-mng.akamaized.net/images/item/origin/988d4dfae9a3def5d48ae61032c1f3fb.png?imformat=generic&q=90&im=Resize,width=300,type=normal" }
+        {
+          "name": "メモリ付き登山用ウォータボトル500ml",
+          "price": "¥1,190(税込)",
+          "url": "https://store.yamatabi.shop/items/110174141",
+          "image": "https://baseec-img-mng.akamaized.net/images/item/origin/ac77626fabc1e90b15bda329f101de9f.png?imformat=generic&q=90&im=Resize,width=300,type=normal"
+        },
+        {
+          "name": "ライトウェイトサンシェード(ネックカバー)",
+          "price": "¥2,990(税込)",
+          "url": "https://store.yamatabi.shop/items/75818967",
+          "image": "https://baseec-img-mng.akamaized.net/images/item/origin/f9c6ef085e8f1e52870fc5a5e6eed306.png?imformat=generic&q=90&im=Resize,width=300,type=normal"
+        },
+        {
+          "name": "ULマルチテーブル(日本製)",
+          "price": "¥7,990(税込)",
+          "url": "https://store.yamatabi.shop/items/84723624",
+          "image": "https://baseec-img-mng.akamaized.net/images/item/origin/b13c3b41a0ab723e3fa6ef291c2b196d.png?imformat=generic&q=90&im=Resize,width=300,type=normal"
+        },
+        {
+          "name": "ダイニーマ製3つ折りウォレット",
+          "price": "¥8,990(税込)",
+          "url": "https://store.yamatabi.shop/items/66734447",
+          "image": "https://baseec-img-mng.akamaized.net/images/item/origin/c88fcfb4c5b0ca8ada37b494bdfd34c1.png?imformat=generic&q=90&im=Resize,width=300,type=normal"
+        }
       ]
     },
-    "2611B04": { "page": "sns" }
+    "2611B04": {
+      "page": "sns"
+    }
   },
   "sns": [
-    { "id": "youtube", "name": "YouTube 山旅旅チャンネル", "note": "山行の記録や道具の紹介を動画で", "url": "https://www.youtube.com/@yamatabitabi", "mark": "▶", "color": "#C4302B" },
-    { "id": "instagram", "name": "Instagram", "note": "@yamatabitabi", "url": "https://www.instagram.com/yamatabitabi/", "mark": "IG", "color": "#B1407F" },
-    { "id": "x", "name": "X", "note": "@yamatabitabi", "url": "https://twitter.com/yamatabitabi", "mark": "X", "color": "#1F2A24" },
-    { "id": "facebook", "name": "Facebook", "note": "山旅旅", "url": "https://www.facebook.com/yamatabitabi", "mark": "f", "color": "#1877F2" },
-    { "id": "magazine", "name": "ウェブマガジン 山旅旅", "note": "山の記事・連載・道具のレビュー", "url": "https://yamatabitabi.com/", "mark": "山", "color": "#2F4F3E" },
-    { "id": "store", "name": "オンラインストア", "note": "store.yamatabi.shop", "url": "https://store.yamatabi.shop/", "mark": "旅", "color": "#2F4F3E" }
+    {
+      "id": "youtube",
+      "name": "YouTube 山旅旅チャンネル",
+      "note": "山行の記録や道具の紹介を動画で",
+      "url": "https://www.youtube.com/@yamatabitabi",
+      "mark": "▶",
+      "color": "#C4302B"
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "note": "@yamatabitabi",
+      "url": "https://www.instagram.com/yamatabitabi/",
+      "mark": "IG",
+      "color": "#B1407F"
+    },
+    {
+      "id": "x",
+      "name": "X",
+      "note": "@yamatabitabi",
+      "url": "https://twitter.com/yamatabitabi",
+      "mark": "X",
+      "color": "#1F2A24"
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "note": "山旅旅",
+      "url": "https://www.facebook.com/yamatabitabi",
+      "mark": "f",
+      "color": "#1877F2"
+    },
+    {
+      "id": "magazine",
+      "name": "ウェブマガジン 山旅旅",
+      "note": "山の記事・連載・道具のレビュー",
+      "url": "https://yamatabitabi.com/",
+      "mark": "山",
+      "color": "#2F4F3E"
+    },
+    {
+      "id": "store",
+      "name": "オンラインストア",
+      "note": "store.yamatabi.shop",
+      "url": "https://store.yamatabi.shop/",
+      "mark": "旅",
+      "color": "#2F4F3E"
+    }
   ]
 }
