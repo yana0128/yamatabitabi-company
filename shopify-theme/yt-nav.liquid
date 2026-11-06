@@ -17,10 +17,9 @@
     {%- for r in rows -%}
       {%- assign x = r | split: '|' -%}
       {%- assign col = collections[x[0]] -%}
-      {%- assign img = col.image -%}
-      {%- unless img -%}
-        {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
-        {%- unless img -%}{%- assign img = col.products.first.featured_image -%}{%- endunless -%}
+      {%- assign img = nil -%}
+      {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
+      {%- unless img -%}{%- assign img = col.products.first.featured_image | default: col.image -%}{%- endunless -%}
       {%- endunless -%}
       <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
     {%- endfor -%}
@@ -38,7 +37,7 @@
 .yt-nav__g::-webkit-scrollbar{display:none}
 .yt-nav__g a{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#1b1b19}
 .yt-nav__ic{width:64px;height:64px;border-radius:50%;background:#F4F0E8;overflow:hidden;display:block}
-.yt-nav__ic img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-nav__ic{isolation:isolate}.yt-nav__ic img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:multiply}.yt-nav__g a[href$="/tent"] .yt-nav__ic img{filter:brightness(1.14) contrast(1.06)}
 .yt-nav__t{font-size:1.15rem;line-height:1.3;text-align:center;font-weight:700;letter-spacing:0}
 .yt-nav__g a:hover .yt-nav__ic{outline:2px solid #E08A1E;outline-offset:2px}
 .yt-nav__hd{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px}
