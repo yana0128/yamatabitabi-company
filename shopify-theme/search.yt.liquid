@@ -1,0 +1,2 @@
+{%- layout none -%}
+{%- paginate search.results by 12 -%}{"n":{{ search.results_count | json }},"p":[{%- assign f = true -%}{%- for r in search.results -%}{%- if r.object_type == 'product' -%}{%- unless f -%},{%- endunless -%}{%- assign f = false -%}{"t":{{ r.title | json }},"u":{{ r.url | json }},"i":{{ r.featured_image | image_url: width: 120 | json }},"p":{{ r.price | json }},"a":{{ r.available | json }}}{%- endif -%}{%- endfor -%}]}{%- endpaginate -%}

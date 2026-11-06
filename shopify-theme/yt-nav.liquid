@@ -1,0 +1,43 @@
+{%- liquid
+  assign en = false
+  if request.locale.iso_code == 'en'
+    assign en = true
+  endif
+  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies~7216890|テーブル|Tables~7216829|マット|Mats~tent|テント|Tents~6530746|トレッキングポール|Poles~7216875|行動食|Trail food~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care~all|すべての商品|All products' | split: '~'
+-%}
+<section class="yt-nav" aria-label="{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}">
+  <form class="yt-nav__s" action="{{ routes.search_url }}" method="get" role="search">
+    <input type="search" name="q" placeholder="{% if en %}Search products{% else %}商品をさがす（例：てぶくろ・メリノ・ザック）{% endif %}" aria-label="{% if en %}Search{% else %}検索{% endif %}" autocomplete="off">
+    <input type="hidden" name="type" value="product"><input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" aria-label="{% if en %}Search{% else %}検索{% endif %}">{{- 'icon-search.svg' | inline_asset_content -}}</button>
+  </form>
+  <ul class="yt-nav__g">
+    {%- for r in rows -%}
+      {%- assign x = r | split: '|' -%}
+      {%- assign col = collections[x[0]] -%}
+      {%- assign img = col.image -%}
+      {%- unless img -%}
+        {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
+      {%- endunless -%}
+      <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
+    {%- endfor -%}
+  </ul>
+</section>
+<style>
+.yt-nav{max-width:120rem;margin:0 auto;padding:16px 16px 8px}
+.yt-nav__s{display:flex;align-items:center;border:2px solid #1b1b19;border-radius:999px;background:#fff;padding:0 6px 0 18px;height:48px;margin-bottom:14px}
+.yt-nav__s input[type=search]{flex:1;border:0;outline:0;background:none;font-size:1.5rem;height:100%;min-width:0;-webkit-appearance:none}
+.yt-nav__s button{width:38px;height:38px;border:0;border-radius:50%;background:#E08A1E;color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.yt-nav__s button svg{width:18px;height:18px}
+.yt-nav__g{list-style:none;margin:0;padding:0 0 6px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:74px;gap:12px 10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.yt-nav__g::-webkit-scrollbar{display:none}
+.yt-nav__g a{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:#1b1b19}
+.yt-nav__ic{width:64px;height:64px;border-radius:50%;background:#F4F0E8;overflow:hidden;display:block}
+.yt-nav__ic img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-nav__t{font-size:1.15rem;line-height:1.3;text-align:center;font-weight:700;letter-spacing:0}
+.yt-nav__g a:hover .yt-nav__ic{outline:2px solid #E08A1E;outline-offset:2px}
+@media (min-width:990px){.yt-nav{padding:28px 32px 12px}.yt-nav__s{max-width:640px;margin:0 auto 22px;height:52px}.yt-nav__g{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(10,1fr);overflow:visible;gap:20px 12px}.yt-nav__ic{width:76px;height:76px}.yt-nav__t{font-size:1.25rem}}
+</style>
+{% schema %}
+{"name":"カテゴリーナビ（検索つき）","settings":[],"presets":[{"name":"カテゴリーナビ（検索つき）"}]}
+{% endschema %}

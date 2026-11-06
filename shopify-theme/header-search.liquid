@@ -1,0 +1,121 @@
+{%- comment -%}ABテスト：スマホのヘッダーに検索アイコンを出す(A)／出さない(B)。検索はメニュー内にもある 2026-10{%- endcomment -%}
+<script>(function(){var h=document.documentElement;if(h.hasAttribute('data-yt-srch'))return;var T='search_icon_202610',k='yt_ab_'+T,v;try{v=localStorage.getItem(k);if(v!=='A'&&v!=='B'){v=Math.random()<.5?'A':'B';localStorage.setItem(k,v)}}catch(e){v='A'}h.setAttribute('data-yt-srch',v);window.ytAB=window.ytAB||{};window.ytAB[T]=v;try{(window.dataLayer=window.dataLayer||[]).push({event:'ab_view',ab_test:T,ab_variant:v});if(window.Shopify&&Shopify.analytics&&Shopify.analytics.publish)Shopify.analytics.publish('yt_ab_view',{ab_test:T,ab_variant:v})}catch(e){}})();</script>
+<style>@media (max-width:989px){html[data-yt-srch="B"] .header__icon--search{display:none!important}}</style>
+{% comment %}
+  Renders a header search modal. Should be used with 'header.liquid'
+
+  Accepts:
+  - input_id: {String} Id for the search input element (required)
+
+  Usage:
+  {% render 'header-search', input_id: 'My-Id'%}
+{% endcomment %}
+
+<script src="{{ 'yt-search.js' | asset_url }}" defer="defer"></script>
+<details-modal class="header__search">
+  <details>
+    <summary
+      class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
+      aria-haspopup="dialog"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <span>
+        <span class="svg-wrapper">
+          {{- 'icon-search.svg' | inline_asset_content -}}
+        </span>
+        <span class="svg-wrapper header__icon-close">
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </span>
+      </span>
+    </summary>
+    <div
+      class="search-modal modal__content gradient"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'general.search.search' | t }}"
+    >
+      <div class="modal-overlay"></div>
+      <div
+        class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+        tabindex="-1"
+      >
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+        {%- else -%}
+          <search-form class="search-modal__form">
+        {%- endif -%}
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+          <div class="field">
+            <input
+              class="search__input field__input"
+              id="{{ input_id }}"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+              {%- if settings.predictive_search_enabled -%}
+                role="combobox"
+                aria-expanded="false"
+                aria-owns="predictive-search-results"
+                aria-controls="predictive-search-results"
+                aria-haspopup="listbox"
+                aria-autocomplete="list"
+                autocorrect="off"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+              {%- endif -%}
+            >
+            {%- comment -%}
+              Hidden rather than removed: the word sat inside the empty field and
+              read as text already typed, but the input still needs a label for
+              screen readers. The placeholder carries the visible hint instead -
+              see component-search.css, which re-enables it now that no floating
+              label covers it. Matches header-search-inline.liquid.
+            {%- endcomment -%}
+            <label class="field__label visually-hidden" for="{{ input_id }}">
+              {{- 'general.search.search' | t -}}
+            </label>
+            <input type="hidden" name="options[prefix]" value="last"><input type="hidden" name="options[fields]" value="title,product_type,variants.title,vendor,tag">
+            <button
+              type="reset"
+              class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+              aria-label="{{ 'general.search.reset' | t }}"
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-reset.svg' | inline_asset_content -}}
+              </span>
+            </button>
+            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+              <span class="svg-wrapper">
+                {{- 'icon-search.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </div>
+
+          {%- if settings.predictive_search_enabled -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+          {%- endif -%}
+        </form>
+        {%- if settings.predictive_search_enabled -%}
+          </predictive-search>
+        {%- else -%}
+          </search-form>
+        {%- endif -%}
+        <button
+          type="button"
+          class="search-modal__close-button modal__close-button link link--text focus-inset"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </span>
+        </button>
+      </div>
+    </div>
+  </details>
+</details-modal>

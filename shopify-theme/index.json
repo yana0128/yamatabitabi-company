@@ -1,0 +1,631 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "top_slider": {
+      "type": "top-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home_ultralight_jacket.avif",
+            "product": "",
+            "heading": "超軽量アクティブインサレーション",
+            "caption": "FEATURED",
+            "button_label": "詳しく見る",
+            "link": "/collections/all"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home_cool_dots.avif",
+            "product": "",
+            "heading": "COOL DOTSで常に快適",
+            "caption": "NEW",
+            "button_label": "商品を見る",
+            "link": "/collections/all"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/lookbook-2.webp",
+            "product": "",
+            "heading": "山と旅の装い",
+            "caption": "LOOKBOOK",
+            "button_label": "ルックブック",
+            "link": "/collections/all"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-info-banner.avif",
+            "product": "",
+            "heading": "東京・清澄白河",
+            "caption": "STORE",
+            "button_label": "店舗情報",
+            "link": "/pages/direct-store"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "image_fit": "cover",
+        "aspect_ratio_mobile": "1 / 1",
+        "aspect_ratio": "1 / 1",
+        "slides_desktop": 3,
+        "peek": 6,
+        "text_position": "bottom-left",
+        "overlay_opacity": 30,
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_d99DUG": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- liquid\nassign en = false\nif request.locale.iso_code == 'en'\nassign en = true\nendif\nassign m = 'now' | date: '%m' | plus: 0\nif m >= 3 and m <= 5\nassign s_handle = '6577250'\nassign s_ja = '春の山歩き'\nassign s_en = 'Spring hiking'\nelsif m >= 6 and m <= 8\nassign s_handle = '7217620'\nassign s_ja = '夏の暑さ対策'\nassign s_en = 'Beat the summer heat'\nelsif m >= 9 and m <= 11\nassign s_handle = '6296770'\nassign s_ja = '秋冬の行動保温'\nassign s_en = 'Fall & winter layering'\nelse\nassign s_handle = '6616045'\nassign s_ja = '冬の防寒'\nassign s_en = 'Winter warmth'\nendif\nassign s_col = collections[s_handle]\nassign s_prod = nil\nfor p in s_col.products limit: 30\nif p.available and p.vendor == '山旅'\nassign s_prod = p\nbreak\nendif\nendfor\nif s_prod == nil\nfor p in s_col.products limit: 30\nif p.available\nassign s_prod = p\nbreak\nendif\nendfor\nendif\nassign n_prod = nil\nfor p in collections['new-arrivals'].products limit: 10\nif p.available\nassign n_prod = p\nbreak\nendif\nendfor\nassign b_prod = nil\nfor p in collections['best-sellers'].products limit: 10\nif p.available and p.id != n_prod.id and p.id != s_prod.id\nassign b_prod = p\nbreak\nendif\nendfor\nassign art = blogs.journal.articles.first\n-%}\n<section class=\"yt-hero\" aria-label=\"{% if en %}Featured{% else %}特集{% endif %}\">\n<div class=\"yt-hero__track\" data-yt-track>\n{%- if s_prod -%}\n<a class=\"yt-hc\" href=\"{{ s_col.url }}\">\n<span class=\"yt-hc__img\"><img src=\"{{ s_prod.featured_image | image_url: width: 600 }}\" srcset=\"{{ s_prod.featured_image | image_url: width: 400 }} 400w, {{ s_prod.featured_image | image_url: width: 600 }} 600w, {{ s_prod.featured_image | image_url: width: 900 }} 900w\" sizes=\"(max-width: 749px) 84vw, 32vw\" alt=\"\" loading=\"eager\" fetchpriority=\"high\" width=\"900\" height=\"900\"><span class=\"yt-hc__tag yt-hc__tag--season\">{% if en %}SEASON{% else %}季節のおすすめ{% endif %}</span></span>\n<span class=\"yt-hc__body\"><span class=\"yt-hc__ttl\">{% if en %}{{ s_en }}{% else %}{{ s_ja }}{% endif %}</span><span class=\"yt-hc__sub\">{{ s_prod.title | split: '（' | first }}</span><span class=\"yt-hc__cta\">{% if en %}Shop the collection{% else %}特集を見る{% endif %} →</span></span>\n</a>\n{%- endif -%}\n{%- if n_prod -%}\n<a class=\"yt-hc\" href=\"{{ n_prod.url }}\">\n<span class=\"yt-hc__img\"><img src=\"{{ n_prod.featured_image | image_url: width: 600 }}\" srcset=\"{{ n_prod.featured_image | image_url: width: 400 }} 400w, {{ n_prod.featured_image | image_url: width: 600 }} 600w, {{ n_prod.featured_image | image_url: width: 900 }} 900w\" sizes=\"(max-width: 749px) 84vw, 32vw\" alt=\"\" loading=\"lazy\" width=\"900\" height=\"900\"><span class=\"yt-hc__tag yt-hc__tag--new\">{% if en %}NEW ARRIVAL{% else %}新商品{% endif %}</span></span>\n<span class=\"yt-hc__body\"><span class=\"yt-hc__ttl\">{{ n_prod.title | split: '（' | first }}</span><span class=\"yt-hc__sub\">{{ n_prod.price | money }}{% if en %}{% else %}（税込）{% endif %}</span><span class=\"yt-hc__cta\">{% if en %}View item{% else %}商品を見る{% endif %} →</span></span>\n</a>\n{%- endif -%}\n{%- if art -%}\n<a class=\"yt-hc\" href=\"{{ art.url }}\">\n<span class=\"yt-hc__img\"><img src=\"{{ art.image | image_url: width: 600 }}\" srcset=\"{{ art.image | image_url: width: 400 }} 400w, {{ art.image | image_url: width: 600 }} 600w, {{ art.image | image_url: width: 900 }} 900w\" sizes=\"(max-width: 749px) 84vw, 32vw\" alt=\"\" loading=\"lazy\" width=\"900\" height=\"900\"><span class=\"yt-hc__tag yt-hc__tag--journal\">{% if en %}JOURNAL{% else %}最新の読みもの{% endif %}</span></span>\n{%- assign at = art.title | split: '｜' -%}\n<span class=\"yt-hc__body\"><span class=\"yt-hc__ttl\">{{ at[0] }}</span><span class=\"yt-hc__sub\">{{ art.published_at | date: '%Y.%m.%d' }}</span><span class=\"yt-hc__cta\">{% if en %}Read the article{% else %}記事を読む{% endif %} →</span></span>\n</a>\n{%- endif -%}\n{%- if b_prod -%}\n<a class=\"yt-hc\" href=\"{{ b_prod.url }}\">\n<span class=\"yt-hc__img\"><img src=\"{{ b_prod.featured_image | image_url: width: 600 }}\" srcset=\"{{ b_prod.featured_image | image_url: width: 400 }} 400w, {{ b_prod.featured_image | image_url: width: 600 }} 600w, {{ b_prod.featured_image | image_url: width: 900 }} 900w\" sizes=\"(max-width: 749px) 84vw, 32vw\" alt=\"\" loading=\"lazy\" width=\"900\" height=\"900\"><span class=\"yt-hc__tag yt-hc__tag--best\">{% if en %}BEST SELLER{% else %}いま売れています{% endif %}</span></span>\n<span class=\"yt-hc__body\"><span class=\"yt-hc__ttl\">{{ b_prod.title | split: '（' | first }}</span><span class=\"yt-hc__sub\">{{ b_prod.price | money }}{% if en %}{% else %}（税込）{% endif %}</span><span class=\"yt-hc__cta\">{% if en %}View item{% else %}商品を見る{% endif %} →</span></span>\n</a>\n{%- endif -%}\n<a class=\"yt-hc\" href=\"/pages/direct-store\">\n<span class=\"yt-hc__img\"><img src=\"https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=600\" srcset=\"https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=400 400w, https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=600 600w, https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=900 900w\" sizes=\"(max-width: 749px) 84vw, 32vw\" alt=\"\" loading=\"lazy\" decoding=\"async\" width=\"900\" height=\"900\"><span class=\"yt-hc__tag yt-hc__tag--store\">{% if en %}OUR STORE{% else %}直営店{% endif %}</span></span>\n<span class=\"yt-hc__body\"><span class=\"yt-hc__ttl\">{% if en %}Visit us in Kiyosumi-Shirakawa, Tokyo{% else %}東京・清澄白河の直営店{% endif %}</span><span class=\"yt-hc__sub\">{% if en %}Open Fri, Sat & Sun{% else %}金・土・日 営業｜実物を見て選べます{% endif %}</span><span class=\"yt-hc__cta\">{% if en %}Store info{% else %}店舗情報を見る{% endif %} →</span></span>\n</a>\n</div>\n<button type=\"button\" class=\"yt-hero__nav yt-hero__nav--prev\" data-yt-prev aria-label=\"{% if en %}Previous{% else %}前へ{% endif %}\">‹</button>\n<button type=\"button\" class=\"yt-hero__nav yt-hero__nav--next\" data-yt-next aria-label=\"{% if en %}Next{% else %}次へ{% endif %}\">›</button>\n</section>\n<style>\n.yt-hero{position:relative;max-width:1400px;margin:0 auto;padding:24px 0 36px}@media(min-width:990px){.yt-hero{max-width:1200px;padding:24px 50px 36px}.yt-hero .yt-hero__track{grid-auto-columns:calc((100% - 32px)/3)!important;padding:0!important;scroll-padding:0!important}.yt-hero .yt-hero__nav--prev{left:24px}.yt-hero .yt-hero__nav--next{right:24px}}\n.yt-hero__track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px - 32px)/3.15);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px;scrollbar-width:none;scroll-padding:0 20px}\n.yt-hero__track::-webkit-scrollbar{display:none}\n.yt-hc{position:relative;scroll-snap-align:start;display:block;aspect-ratio:1/1;border-radius:8px;overflow:hidden;text-decoration:none;color:#fff;background:#2b2925}\n.yt-hc__img{position:absolute;inset:0;display:block}\n.yt-hc__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}\n.yt-hc__img::after{content:\"\";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 40%,rgba(0,0,0,.72) 100%)}\n.yt-hc:hover .yt-hc__img img{transform:scale(1.04)}\n.yt-hc__tag{position:absolute;z-index:2;left:16px;top:16px;font-size:12px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:3px;background:#fff;color:#111}\n.yt-hc__tag--season{background:#2f4a3a;color:#fff}.yt-hc__tag--new{background:#f08a1c;color:#fff}.yt-hc__tag--journal{background:#fff;color:#111}.yt-hc__tag--best{background:#111;color:#fff}.yt-hc__tag--store{background:#8a5a32;color:#fff}\n.yt-hc__body{position:absolute;z-index:2;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:20px 22px 22px;text-shadow:0 1px 8px rgba(0,0,0,.35)}\n.yt-hc__ttl{font-size:21px;font-weight:700;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}\n.yt-hc__sub{font-size:13px;opacity:.9;line-height:1.6;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}\n.yt-hc__cta{align-self:flex-start;margin-top:8px;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:7px 16px;text-shadow:none}\n.yt-hero__nav{position:absolute;top:calc(24px + (100% - 60px) * .5 - 22px);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.95);box-shadow:0 2px 10px rgba(0,0,0,.15);font-size:26px;line-height:1;cursor:pointer;color:#111}\n.yt-hero__nav--prev{left:8px}.yt-hero__nav--next{right:8px}\n@media (max-width:749px){.yt-hero{padding:16px 0 28px}.yt-hero__track{grid-auto-columns:84%;gap:12px;padding:0 16px;scroll-padding:0 16px}.yt-hero__nav{display:none}.yt-hc__ttl{font-size:19px}}\n</style>\n<script>(function(){var r=document.currentScript.previousElementSibling.previousElementSibling;var t=r.querySelector('[data-yt-track]');function step(d){var cs=t.querySelectorAll('.yt-hc');if(!cs.length)return;var pl=parseFloat(getComputedStyle(t).paddingLeft)||0,tl=t.getBoundingClientRect().left,x=t.scrollLeft,i=0,best=1e9;var ps=[].map.call(cs,function(c){return c.getBoundingClientRect().left-tl+x-pl});ps.forEach(function(p,k){var dd=Math.abs(p-x);if(dd<best){best=dd;i=k}});var max=t.scrollWidth-t.clientWidth;var n=i+d;if(d>0&&x>=max-4)n=0;if(n<0)n=cs.length-1;if(n>=cs.length)n=0;t.scrollTo({left:Math.min(ps[n],max),behavior:'smooth'});}var hold=false,tm=null;function auto(){clearInterval(tm);if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;tm=setInterval(function(){if(!hold&&!document.hidden)step(1)},5000)}r.addEventListener('mouseenter',function(){hold=true});r.addEventListener('mouseleave',function(){hold=false});t.addEventListener('touchstart',function(){hold=true;clearTimeout(t.__h);t.__h=setTimeout(function(){hold=false},8000)},{passive:true});auto();r.querySelector('[data-yt-prev]').addEventListener('click',function(){step(-1)});r.querySelector('[data-yt-next]').addEventListener('click',function(){step(1)});})();</script>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "multirow_EeDfpP": {
+      "type": "multirow",
+      "blocks": {
+        "row_wEVMCi": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/home_ultralight_jacket.avif",
+            "caption": "",
+            "heading": "超軽量アクティブインサレーション",
+            "text": "<p>ジャケットタイプで脱ぎ着がしやすいアルファダイレクト</p>",
+            "button_label": "製品を見る",
+            "button_link": "shopify://collections/6296770"
+          }
+        },
+        "row_jLNYLY": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/home_cool_dots.avif",
+            "caption": "",
+            "heading": "COOL DOTSで常に快適",
+            "text": "<p>紫外線から身を守り、頭も首も蒸れずに行動が可能</p>",
+            "button_label": "製品を見る",
+            "button_link": "shopify://collections/7217620"
+          }
+        }
+      },
+      "block_order": [
+        "row_wEVMCi",
+        "row_jLNYLY"
+      ],
+      "disabled": true,
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-right",
+        "heading_size": "h1",
+        "heading_font_size": 25,
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "row_color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "hotspot_qUFxMR": {
+          "type": "hotspot",
+          "settings": {
+            "stage": "2",
+            "product": "polartec-alpha-direct-90-cropped-ul-tights-aug030",
+            "position_x": 50,
+            "position_y": 63,
+            "label": "",
+            "custom_url": ""
+          }
+        },
+        "hotspot_jBhP37": {
+          "type": "hotspot",
+          "settings": {
+            "stage": "2",
+            "product": "polartec-alpha-direct-90-ul-hoodie-aug055",
+            "position_x": 50,
+            "position_y": 30,
+            "label": "",
+            "custom_url": ""
+          }
+        },
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "stage": "1",
+            "product": "adventure-16-bomber-hat-a16008",
+            "position_x": 45,
+            "position_y": 13,
+            "label": "",
+            "custom_url": ""
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "stage": "1",
+            "product": "yamatabi-hareki-jacquard-flower-shirt-hareki006",
+            "position_x": 45,
+            "position_y": 60,
+            "label": "",
+            "custom_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_qUFxMR",
+        "hotspot_jBhP37",
+        "hotspot_1",
+        "hotspot_2"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "ルックブック",
+        "heading_size": "h2",
+        "image": "shopify://shop_images/d06ca0e1e3d148441e3337aa9f33d59b.jpg",
+        "image_2": "shopify://shop_images/lookbook-2.webp",
+        "open_on": "click",
+        "show_product_list": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_jCXY7T": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_DbLMQ8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "3973880"
+          }
+        },
+        "featured_collection_zAfbYz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "3973881"
+          }
+        },
+        "featured_collection_zPYiDx": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "6267812"
+          }
+        },
+        "featured_collection_TDwaCD": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "7216829"
+          }
+        },
+        "featured_collection_rX6trn": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "parent-af5e16317a"
+          }
+        },
+        "featured_collection_CmGWk9": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "7216875"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_DbLMQ8",
+        "featured_collection_zAfbYz",
+        "featured_collection_zPYiDx",
+        "featured_collection_TDwaCD",
+        "featured_collection_rX6trn",
+        "featured_collection_CmGWk9"
+      ],
+      "disabled": true,
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "カテゴリー",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_eHjYWg": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- liquid\nassign en = false\nif request.locale.iso_code == 'en'\nassign en = true\nendif\nassign F = 'https://cdn.shopify.com/s/files/1/0745/1102/4295/files/'\n-%}\n{%- capture looks -%}\nmt|LOOK 01 / FOREST TRAIL|style-sq-mt-lowhill-v4.jpg?v=1792931300|木漏れ日の低山を、軽く歩く|Light steps on a sunlit forest trail|||polartec-alpha-direct-90-ul-jacket-aug018,polartec-alpha-direct-90-ul-tights-aug024,7elements-standard-cap-aug041,yamatabi-randonnee-story-25-daypack-saw069\n~city|LOOK 02 / NIGHT WALK|style-sq-city-night-v5.jpg?v=1792936144|夜の街を、もうひと歩き|One more walk through the city night|||polartec-alpha-direct-90-ul-jacket-aug018,dyneema-ul-sacoche-l-saw034\n~mt|LOOK 03 / MOUNTAIN BREAK|style-sq-mt-rest-v5.jpg?v=1|山の途中で、ひと休み|A short break on the mountain|||polartec-alpha-direct-90-earflap-cap-aug044,ridge-merino-grid-fleece-crew-ridge067\n~city|LOOK 04 / CITY HIKE|style-sq-city-street-v7.jpg?v=1792932523|街を歩く日も、山の道具で|Mountain gear for a day in the city|||ridge-merino-polartec-power-wool-zip-hoodie-ridge008,possum-merino-knit-hat-possum005,possum-merino-gloves-possum021,dyneema-2way-waist-pouch-saw064\n{%- endcapture -%}\n{%- assign cats = '3973880|ギア|Gear~tent|テント|Tents~7216829|マット/パッド|Mats & Pads~3973881|ウェア|Wear~6267812|アクセサリー|Accessories~7216875|行動食/食品|Food' | split: '~' -%}\n<section class=\"yt-cat\">\n<div class=\"yt-style__hd\"><h2>{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}</h2><span>CATEGORY</span></div>\n<ul class=\"yt-cat__grid\">\n{%- for r in cats -%}\n{%- assign x = r | split: '|' -%}\n{%- assign col = collections[x[0]] -%}\n{%- assign img = col.image | default: col.featured_image -%}\n<li><a href=\"{{ col.url }}\"><span class=\"yt-cat__img\">{%- if img -%}<img src=\"{{ img | image_url: width: 400 }}\" srcset=\"{{ img | image_url: width: 240 }} 240w, {{ img | image_url: width: 400 }} 400w\" sizes=\"(max-width: 749px) 30vw, 180px\" alt=\"\" loading=\"lazy\" decoding=\"async\" width=\"400\" height=\"400\">{%- endif -%}</span><span class=\"yt-cat__name\"><span>{% if en %}<b>{{ x[2] }}</b>{% else %}<b>{{ x[1] }}</b><small>{{ x[2] | upcase }}</small>{% endif %}</span><i>→</i></span></a></li>\n{%- endfor -%}\n</ul>\n</section>\n<section class=\"yt-style\">\n<div class=\"yt-style__hd\"><h2>{% if en %}Styles for mountain &amp; city{% else %}山と街のスタイル{% endif %}</h2><span>STYLE</span></div>\n<div class=\"yt-style__grid\">\n{%- assign rows = looks | split: '~' -%}\n{%- for row in rows -%}\n{%- assign c = row | strip | split: '|' -%}\n{%- assign handles = c[7] | strip | split: ',' -%}\n{%- assign total = 0 -%}\n<article class=\"yt-lk\">\n<div class=\"yt-lk__ph\">\n<img src=\"{{ F }}{{ c[2] }}&width=600\" srcset=\"{{ F }}{{ c[2] }}&width=400 400w, {{ F }}{{ c[2] }}&width=600 600w, {{ F }}{{ c[2] }}&width=900 900w\" sizes=\"(max-width: 749px) 92vw, 46vw\" alt=\"\" loading=\"lazy\" decoding=\"async\" width=\"900\" height=\"900\">\n<div class=\"yt-lk__cap\"><p class=\"yt-lk__no\">{{ c[1] }}</p><h3>{% if en %}{{ c[4] }}{% else %}{{ c[3] }}{% endif %}</h3></div>\n</div>\n<div class=\"yt-lk__txt\">\n<ul class=\"yt-lk__items\">\n{%- for h in handles -%}\n{%- assign p = all_products[h] -%}\n{%- if p.title != blank -%}\n{%- assign total = total | plus: p.price -%}\n<li><a href=\"{{ p.url }}\"><img src=\"{{ p.featured_image | image_url: width: 120 }}\" alt=\"\" loading=\"lazy\" decoding=\"async\" width=\"56\" height=\"56\"><span><b>{{ p.title | split: '（' | first }}</b><em>{{ p.price | money }}{% unless p.available %}<i>{% if en %}Sold out{% else %}在庫切れ{% endif %}</i>{% endunless %}</em></span></a></li>\n{%- endif -%}\n{%- endfor -%}\n</ul>\n<div class=\"yt-lk__foot\"><span>{% if en %}Total{% else %}合計{% endif %} <b>{{ total | money }}</b>{% unless en %}（税込）{% endunless %}</span></div>\n</div>\n</article>\n{%- endfor -%}\n</div>\n</section>\n<style>\n.yt-style{max-width:1200px;margin:0 auto;padding:36px 20px 48px}\n.yt-style__hd{display:flex;align-items:baseline;gap:14px;margin:0 0 20px}.yt-style__hd h2{font-size:clamp(22px,2.6vw,28px);margin:0;font-weight:700}.yt-style__hd span{font-size:12px;letter-spacing:.3em;color:#8a7f6e;font-weight:700}\n.yt-style__grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}\n.yt-lk{background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;content-visibility:auto;contain-intrinsic-size:auto 900px}\n.yt-lk__ph{position:relative;aspect-ratio:1/1;background:#e6e2da}.yt-lk__ph img{width:100%;height:100%;object-fit:cover;display:block}\n.yt-lk__ph::after{content:\"\";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6))}\n.yt-lk__cap{position:absolute;z-index:1;left:0;right:0;bottom:0;padding:18px 20px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}\n.yt-lk__no{font-size:11px;letter-spacing:.25em;font-weight:700;margin:0 0 4px;opacity:.85}\n.yt-lk h3{font-size:20px;margin:0;line-height:1.45;color:#fff}\n.yt-lk__txt{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}\n.yt-lk__items{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}\n.yt-lk__items a{display:flex;gap:10px;align-items:center;border:1px solid #eee9df;border-radius:6px;padding:6px;text-decoration:none;color:#111;height:100%;box-sizing:border-box}\n.yt-lk__items a:hover{border-color:#111}\n.yt-lk__items img{width:48px;height:48px;flex:none;object-fit:cover;border-radius:4px;background:#f2efe9}\n.yt-lk__items b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;line-height:1.45;font-weight:600}.yt-lk__items em{font-style:normal;font-size:12px;color:#666}\n.yt-lk__items i{font-style:normal;margin-left:6px;color:#b33;font-weight:700}\n.yt-lk__foot{margin-top:auto;font-size:13px}.yt-lk__foot b{font-size:17px}\n.yt-cat{max-width:1200px;margin:0 auto;padding:40px 5rem 4px}\n.yt-cat__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}\n.yt-cat__grid a{display:block;text-decoration:none;color:#111}\n.yt-cat__img{display:block;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:#f2efe9}\n.yt-cat__img img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.2);transition:transform .5s}\n.yt-cat__grid a:hover .yt-cat__img img{transform:scale(1.27)}\n.yt-cat__name{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:10px;padding:0 2px}\n.yt-cat__name b{display:block;font-size:15px;font-weight:700;line-height:1.4}.yt-cat__name small{display:block;font-size:10px;letter-spacing:.18em;color:#8a7f6e;font-weight:700;margin-top:2px}\n.yt-cat__name i{font-style:normal;font-size:15px;color:#8a7f6e;transition:transform .3s}.yt-cat__grid a:hover .yt-cat__name i{transform:translateX(3px);color:#111}\n@media (max-width:749px){.yt-cat{padding:28px 16px 0}.yt-cat__grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:30%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 4px;scroll-padding:0 16px;scrollbar-width:none}.yt-cat__grid::-webkit-scrollbar{display:none}.yt-cat__grid li{scroll-snap-align:start}.yt-cat__name{margin-top:8px}.yt-cat__name b{font-size:13px}.yt-cat__name small{font-size:9px;letter-spacing:.1em}.yt-cat__name i{display:none}}\n@media (max-width:749px){.yt-style__grid{grid-template-columns:1fr;gap:20px}.yt-style{padding:28px 16px 36px}}\n</style>\n{%- liquid\nassign mo = 'now' | date: '%m' | plus: 0\nif mo >= 4 and mo <= 9\nassign s_in = 'season-summer'\nassign s_off = '6616045'\nelse\nassign s_in = '6616045'\nassign s_off = 'season-summer'\nendif\n-%}\n<script>window.ytSeason={off:{{ collections[s_off].products | map: 'handle' | json }},inn:{{ collections[s_in].products | map: 'handle' | json }},food:{{ collections['7216875'].products | map: 'handle' | json }}};</script>\n<section class=\"yt-store\" id=\"yt-store\"><div class=\"yt-store__in\"><div class=\"yt-store__ph\"><img src=\"https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=700\" srcset=\"https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=500 500w, https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=700 700w, https://cdn.shopify.com/s/files/1/0745/1102/4295/files/store-sign-kiyosumi.jpg?v=1792936856&width=1000 1000w\" sizes=\"(max-width: 749px) 100vw, 540px\" alt=\"\" loading=\"lazy\" decoding=\"async\" width=\"1000\" height=\"1000\"></div><div class=\"yt-store__tx\"><p class=\"yt-store__eb\">OUR STORE</p><h2>{% if en %}YAMATABI<span>Kiyosumi-Shirakawa, Tokyo</span>{% else %}山と旅の道具「山旅」<span>清澄白河店</span>{% endif %}</h2><p class=\"yt-store__lead\">{% if en %}See and try every YAMATABI product in person.{% else %}山旅の全アイテムを、実際に手に取って選べます。{% endif %}</p><dl><div><dt>{% if en %}Hours{% else %}営業{% endif %}</dt><dd>{% if en %}Fri, Sat & Sun 13:00–18:00{% else %}金・土・日 13:00〜18:00{% endif %}</dd></div><div><dt>{% if en %}Access{% else %}アクセス{% endif %}</dt><dd>{% if en %}2 min from Kiyosumi-Shirakawa Sta.{% else %}清澄白河駅 徒歩2分{% endif %}</dd></div><div><dt>{% if en %}Address{% else %}住所{% endif %}</dt><dd>{% if en %}1-3-13 Shirakawa, Koto-ku, Tokyo{% else %}東京都江東区白河1-3-13 清州寮{% endif %}</dd></div></dl><a class=\"yt-store__btn\" href=\"/pages/direct-store\">{% if en %}Store info & access{% else %}店舗情報・アクセス{% endif %} →</a></div></div></section>\n<style>[id$=\"__image_banner\"]{display:none!important}.yt-store{background:#fff}.yt-store__in{max-width:1200px;margin:0 auto;padding:64px 5rem;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}.yt-store__ph{aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:#e6e2da}.yt-store__ph img{width:100%;height:100%;object-fit:cover;display:block}.yt-store__eb{font-size:12px;letter-spacing:.3em;color:#8a7f6e;font-weight:700;margin:0 0 14px}.yt-store h2{font-size:clamp(22px,2.4vw,30px);line-height:1.5;margin:0 0 14px;font-weight:700;letter-spacing:.04em}.yt-store h2 span{display:block;font-size:.7em;color:#555;letter-spacing:.08em}.yt-store__lead{font-size:15px;line-height:1.9;color:#444;margin:0 0 24px}.yt-store dl{margin:0 0 28px;border-top:1px solid #e6e2da}.yt-store dl div{display:grid;grid-template-columns:5.5em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid #e6e2da;font-size:14px;line-height:1.6}.yt-store dt{color:#8a7f6e;font-weight:700}.yt-store dd{margin:0;color:#111}.yt-store__btn{display:inline-flex;align-items:center;justify-content:center;height:50px;padding:0 32px;border:1px solid #111;border-radius:999px;color:#111;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;transition:background .2s,color .2s}.yt-store__btn:hover{background:#111;color:#fff}@media (max-width:749px){.yt-store__in{grid-template-columns:1fr;gap:28px;padding:40px 16px 48px}.yt-store__ph{aspect-ratio:4/3}.yt-store h2{font-size:22px}.yt-store__lead{font-size:14px;margin-bottom:20px}.yt-store dl div{grid-template-columns:5em 1fr;font-size:13.5px}.yt-store__btn{display:flex;width:100%}}\n[id$=\"__row_new_arrivals\"] .collection__title,[id$=\"__best_sellers\"] .collection__title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;width:100%}[id$=\"__row_new_arrivals\"] .collection__view-all{display:none}.yt-more{flex:none;margin-left:auto!important;font-size:14px;font-weight:700;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px}.yt-more:hover{opacity:.7}</style>\n<script>document.addEventListener('DOMContentLoaded',function(){var S=window.ytSeason||{off:[],inn:[]};var L={'__best_sellers':'/collections/best-sellers','__row_new_arrivals':'/collections/new-arrivals'};Object.keys(L).forEach(function(k){var s=document.querySelector('[id$=\"'+k+'\"]');if(!s)return;var t=s.querySelector('.collection__title');if(t&&!t.querySelector('.yt-more')){var l=document.createElement('a');l.href=L[k];l.className='yt-more';l.textContent='{% if en %}View all{% else %}すべて見る{% endif %} →';t.appendChild(l);}var ul=s.querySelector('ul.product-grid');if(!ul)return;var items=[].slice.call(ul.children).map(function(li){var a=li.querySelector('a[href*=\"/products/\"]');var h=a?a.getAttribute('href').split('/products/')[1].split(/[?#]/)[0]:'';return {li:li,h:h,so:!!li.querySelector('.price--sold-out')};});items.forEach(function(x){if(S.off.indexOf(x.h)>-1)x.li.remove();});items=items.filter(function(x){return S.off.indexOf(x.h)<0;});var F=S.food||[],fc=0,keep=[];items.forEach(function(x){var ok=!x.so&&keep.length<8;if(ok&&k==='__best_sellers'&&F.indexOf(x.h)>-1){if(fc>=2)ok=false;else fc++;}if(ok)keep.push(x);});if(keep.length<8){items.forEach(function(x){if(keep.length<8&&keep.indexOf(x)<0&&(k!=='__best_sellers'||F.indexOf(x.h)<0||fc<2)){keep.push(x);}});}items.forEach(function(x){if(keep.indexOf(x)<0)x.li.remove();});items=keep;var rank=function(x){return x.so?2:(S.inn.indexOf(x.h)>-1?0:1);};items.map(function(x,i){return [rank(x),i,x];}).sort(function(a,b){return a[0]-b[0]||a[1]-b[1];}).forEach(function(r){ul.appendChild(r[2].li);});});var b=document.querySelector('[id$=\"__image_banner\"]'),st=document.getElementById('yt-store');if(b&&st)b.parentNode.insertBefore(st,b);});</script>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-sellers",
+        "products_to_show": 20,
+        "title": "ベストセラー",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "view_all_text": "",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "new-arrivals",
+        "products_to_show": 16,
+        "title": "新商品",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全ての新商品",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_wear": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "3973881",
+        "products_to_show": 8,
+        "title": "注目のウェア",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全てのウェア",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_gear": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "3973880",
+        "products_to_show": 8,
+        "title": "おすすめのギア",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全てのギア",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_accessories": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "6267812",
+        "products_to_show": 8,
+        "title": "注目のアクセサリー",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全てのアクセサリー",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_mat": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "7216829",
+        "products_to_show": 8,
+        "title": "世界最軽量のマット",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全てのマット",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "row_food": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "7216875",
+        "products_to_show": 8,
+        "title": "定番の行動食・食品",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "view_all_text": "全ての行動食・食品",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_jtop": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{%- comment -%}トップ：ジャーナル（最新3本）への誘導{%- endcomment -%}\n{%- assign jb = blogs.journal -%}\n{%- if jb.articles_count > 0 -%}\n{%- assign en = false -%}{%- if request.locale.iso_code == 'en' -%}{%- assign en = true -%}{%- endif -%}\n<section class=\"yt-jtop page-width\">\n<div class=\"yt-style__hd\"><h2>{% if en %}Journal{% else %}山の道具の読みもの{% endif %}</h2><span>JOURNAL</span></div>\n<p class=\"yt-jtop__lead\">{% if en %}How we choose gear for Japan's steep mountains.{% else %}標高差の大きい日本の山で、道具をどう選ぶか。作り手の目線で書いています。{% endif %}</p>\n<ul class=\"yt-jtop__grid\">\n{%- for a in jb.articles limit: 3 -%}\n<li><a href=\"{{ a.url }}\" class=\"yt-jtop__card\">\n<span class=\"yt-jtop__img\">{%- if a.image -%}<img src=\"{{ a.image | image_url: width: 600 }}\" srcset=\"{{ a.image | image_url: width: 400 }} 400w, {{ a.image | image_url: width: 800 }} 800w\" sizes=\"(max-width: 749px) 78vw, 33vw\" alt=\"{{ a.title | split: '｜' | first | escape }}\" loading=\"lazy\" decoding=\"async\" width=\"600\" height=\"{{ 600 | divided_by: a.image.aspect_ratio | round }}\">{%- endif -%}<i>No.{{ jb.articles_count | minus: forloop.index0 }}</i></span>\n<span class=\"yt-jtop__t\">{{ a.title | split: '｜' | first }}</span>\n<span class=\"yt-jtop__d\">{{ a.published_at | date: '%Y.%m.%d' }}</span>\n</a></li>\n{%- endfor -%}\n</ul>\n<div class=\"yt-jtop__more\"><a href=\"{{ jb.url }}\">{% if en %}All articles{% else %}すべての記事を見る{% endif %} <span aria-hidden=\"true\">→</span></a></div>\n</section>\n<style>\n#shopify-section-{{ section.id }}{background:#fff;border-top:1px solid #e4dfd5;margin-top:24px}#shopify-section-{{ section.id }}>div,#shopify-section-{{ section.id }} .color-scheme-1,#shopify-section-{{ section.id }} .gradient{background:#fff!important}.yt-jtop{padding-top:48px;padding-bottom:48px}\n.yt-jtop .yt-style__hd{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}\n.yt-jtop .yt-style__hd h2{margin:0}\n.yt-jtop .yt-style__hd span{font-size:11px;letter-spacing:.2em;color:#8a7f6e;font-weight:600}\n.yt-jtop__lead{margin:0 0 18px;font-size:14px;color:#555;line-height:1.8}\n.yt-jtop__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}\n.yt-jtop__card{display:flex;flex-direction:column;gap:8px;color:inherit;text-decoration:none}\n.yt-jtop__img{position:relative;display:block;aspect-ratio:3/2;overflow:hidden;border-radius:6px;background:#f2efe9}\n.yt-jtop__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}\n.yt-jtop__card:hover img{transform:scale(1.03)}\n.yt-jtop__img i{position:absolute;top:10px;left:10px;font-style:normal;padding:3px 9px;background:rgba(var(--color-foreground),.9);color:rgb(var(--color-background));font-size:12px;letter-spacing:.1em;border-radius:2px}\n.yt-jtop__t{font-size:16px;font-weight:700;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}\n.yt-jtop__card:hover .yt-jtop__t{text-decoration:underline;text-underline-offset:.25em}\n.yt-jtop__d{font-size:12px;color:#8a7f6e;letter-spacing:.05em}\n.yt-jtop__more{margin-top:22px;text-align:center}\n.yt-jtop__more a{display:inline-block;padding:12px 28px;border:1px solid #1a1a1a;border-radius:999px;color:#1a1a1a;text-decoration:none;font-weight:700;font-size:14px}\n.yt-jtop__more a:hover{background:#1a1a1a;color:#fff}\n@media (max-width:749px){.yt-jtop__grid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 1.5rem;gap:14px;margin:0 -1.5rem;padding:0 1.5rem 4px}.yt-jtop__grid li{scroll-snap-align:start}.yt-jtop__t{font-size:15px}}\n</style>\n{%- endif -%}\n",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "view_all_products": {
+      "type": "rich-text",
+      "blocks": {
+        "button": {
+          "type": "button",
+          "settings": {
+            "stretch": true,
+            "button_label": "全ての商品を見る",
+            "button_link": "/collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 12,
+        "padding_bottom": 52
+      }
+    },
+    "instagram_grid_8Q9qR6": {
+      "type": "instagram-grid",
+      "disabled": true,
+      "name": "Instagram grid",
+      "settings": {
+        "color_scheme": "",
+        "heading": "INSTAGRAM",
+        "heading_size": "h2",
+        "follow_label": "FOLLOW US",
+        "text_line_1": "Find us on Instagram",
+        "text_line_1_size": "h2",
+        "text_line_2": "Mention @yamatabitabi in your captions for a chance to be featured",
+        "follow_url": "https://www.instagram.com/yamatabitabi/",
+        "show_addsauce_footer": true,
+        "addsauce_profile_url": "https://app.addsauce.com/yamatabitabi?ref=wdgt-ftr-usr_profl",
+        "addsauce_username": "yamatabitabi",
+        "addsauce_avatar_url": "https://cdn.addsauce.com/avatar/xs/2236757718.jpg",
+        "addsauce_brand_url": "https://www.addsauce.com/sauce-visual-shopping-system?utm_source=embed&utm_campaign=yamatabitabi&utm_medium=footer",
+        "source_blog": "instagram",
+        "article_limit": 12,
+        "video_metafield_namespace": "custom",
+        "video_metafield_key": "instagram_video_url",
+        "enable_autoslide": true,
+        "autoslide_speed": 40,
+        "post_gap": 0,
+        "slider_side_padding": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "text_9aLUCW": {
+          "type": "text",
+          "settings": {
+            "text": "清澄白河駅&nbsp;徒歩2分&nbsp;/ 金・土・日&nbsp;13:00〜18:00&nbsp;営業",
+            "text_style": "body"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "山と旅の道具「山旅」",
+            "heading_size": "h1"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "店舗情報・アクセスを見る",
+            "button_link_1": "shopify://pages/direct-store",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_9aLUCW",
+        "heading",
+        "button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/home-info-banner.avif",
+        "image_overlay_opacity": 50,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "buttons_white_background": true
+      }
+    },
+    "yt_nav": {
+      "type": "yt-nav",
+      "settings": {}
+    }
+  },
+  "order": [
+    "yt_nav",
+    "top_slider",
+    "custom_liquid_d99DUG",
+    "multirow_EeDfpP",
+    "lookbook",
+    "collection_list_jCXY7T",
+    "custom_liquid_eHjYWg",
+    "best_sellers",
+    "row_new_arrivals",
+    "row_wear",
+    "row_gear",
+    "row_accessories",
+    "row_mat",
+    "row_food",
+    "view_all_products",
+    "custom_liquid_jtop",
+    "instagram_grid_8Q9qR6",
+    "image_banner"
+  ]
+}
