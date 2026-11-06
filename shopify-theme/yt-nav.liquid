@@ -11,6 +11,8 @@
     <input type="hidden" name="type" value="product"><input type="hidden" name="options[prefix]" value="last"><input type="hidden" name="options[fields]" value="title,product_type,variants.title,vendor,tag">
     <button type="submit" aria-label="{% if en %}Search{% else %}検索{% endif %}">{{- 'icon-search.svg' | inline_asset_content -}}</button>
   </form>
+  <div class="yt-nav__hd"><b>{% if en %}Categories{% else %}カテゴリー{% endif %}</b><span class="yt-nav__hint">{% if en %}Swipe{% else %}横にスライド{% endif %}<i>→</i></span></div>
+  <div class="yt-nav__w" data-yt-navw>
   <ul class="yt-nav__g">
     {%- for r in rows -%}
       {%- assign x = r | split: '|' -%}
@@ -23,7 +25,9 @@
       <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
     {%- endfor -%}
   </ul>
+  </div>
 </section>
+<script>(function(){var w=document.querySelector("[data-yt-navw]");if(!w)return;var g=w.querySelector(".yt-nav__g");function u(){w.classList.toggle("is-end",g.scrollLeft+g.clientWidth>=g.scrollWidth-4);w.classList.toggle("is-moved",g.scrollLeft>8)}g.addEventListener("scroll",u,{passive:true});u();if(g.scrollWidth<=g.clientWidth+4||!("IntersectionObserver" in window))return;var done=0;new IntersectionObserver(function(e,o){if(done||!e[0].isIntersecting)return;done=1;o.disconnect();setTimeout(function(){if(g.scrollLeft>0)return;g.scrollTo({left:90,behavior:"smooth"});setTimeout(function(){if(g.scrollLeft<=95)g.scrollTo({left:0,behavior:"smooth"})},700)},600)},{threshold:.6}).observe(g)})();</script>
 <style>
 .yt-nav{max-width:120rem;margin:0 auto;padding:16px 16px 8px}
 .yt-nav__s{display:flex;align-items:center;border:2px solid #1b1b19;border-radius:999px;background:#fff;padding:0 6px 0 18px;height:48px;margin-bottom:14px}
@@ -37,6 +41,18 @@
 .yt-nav__ic img{width:100%;height:100%;object-fit:cover;display:block}
 .yt-nav__t{font-size:1.15rem;line-height:1.3;text-align:center;font-weight:700;letter-spacing:0}
 .yt-nav__g a:hover .yt-nav__ic{outline:2px solid #E08A1E;outline-offset:2px}
+.yt-nav__hd{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px}
+.yt-nav__hd b{font-size:1.4rem;font-weight:900;letter-spacing:.02em}
+.yt-nav__hint{font-size:1.2rem;font-weight:700;color:#E08A1E;display:flex;align-items:center;gap:4px}
+.yt-nav__hint i{font-style:normal;display:inline-block;animation:ytNavHint 1.4s ease-in-out infinite}
+@keyframes ytNavHint{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.yt-nav__w{position:relative;margin:0 -16px}
+.yt-nav__w .yt-nav__g{padding:0 16px 6px;scroll-padding-left:16px}
+.yt-nav__w:after{content:"";position:absolute;top:0;right:0;bottom:6px;width:56px;background:linear-gradient(90deg,rgba(var(--color-background),0),rgb(var(--color-background)) 85%);pointer-events:none;transition:opacity .25s}
+.yt-nav__w.is-end:after{opacity:0}
+.yt-nav__w.is-moved~.x,.yt-nav.is-moved .yt-nav__hint{opacity:.5}
+@media (prefers-reduced-motion:reduce){.yt-nav__hint i{animation:none}}
+@media (min-width:990px){.yt-nav__hd{display:none}.yt-nav__w{margin:0}.yt-nav__w .yt-nav__g{padding:0}.yt-nav__w:after{display:none}}
 @media (min-width:990px){.yt-nav{padding:28px 32px 12px}.yt-nav__s{max-width:640px;margin:0 auto 22px;height:52px}.yt-nav__g{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(10,1fr);overflow:visible;gap:20px 12px}.yt-nav__ic{width:76px;height:76px}.yt-nav__t{font-size:1.25rem}}
 </style>
 {% schema %}
