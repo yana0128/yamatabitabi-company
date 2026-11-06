@@ -3,7 +3,7 @@
   if request.locale.iso_code == 'en'
     assign en = true
   endif
-  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6267810|タオル|Towels~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies~7216890|テーブル|Tables~7216829|マット|Mats~tent|テント|Tents~6530746|トレッキングポール|Poles~7216875|行動食|Trail food~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care~all|すべての商品|All products' | split: '~'
+  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6267810|タオル|Towels~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies|ziploc-screw-lock-cozy-473ml-myog-kit-yamatabi022:3~7216890|テーブル|Tables|ul-multi-table-cle001:0~7216829|マット|Mats~tent|テント|Tents|air-float-1p-vestibule-fly-yamatabi128:1~6530746|トレッキングポール|Poles~7216875|行動食|Trail food~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care|great-wash-outdoor-detergent-yamatabi086:0~all|すべての商品|All products' | split: '~'
 -%}
 <section class="yt-nav" aria-label="{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}">
   <form class="yt-nav__s" action="{{ routes.search_url }}" method="get" role="search">
@@ -18,7 +18,10 @@
       {%- assign x = r | split: '|' -%}
       {%- assign col = collections[x[0]] -%}
       {%- assign img = nil -%}
+      {%- if x[3] -%}{%- assign pi = x[3] | split: ':' -%}{%- assign pidx = pi[1] | plus: 0 -%}{%- assign img = all_products[pi[0]].images[pidx] -%}{%- endif -%}
+      {%- unless img -%}
       {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
+      {%- endunless -%}
       {%- unless img -%}{%- assign img = col.products.first.featured_image | default: col.image -%}{%- endunless -%}
       {%- endunless -%}
       <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
