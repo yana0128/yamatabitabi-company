@@ -3,7 +3,7 @@
   if request.locale.iso_code == 'en'
     assign en = true
   endif
-  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6267810|タオル|Towels~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies|screw-top-keeper-cozy-500ml-yamatabi024:1~7216890|テーブル|Tables|ul-multi-table-cle001:0~7216829|マット|Mats|ul-closed-cell-mat-180cm-5mm-maru004:0~tent|テント|Tents|air-float-1p-vestibule-fly-yamatabi128:1~6530746|トレッキングポール|Poles~7216875|行動食|Trail food|umeraru-nanko-plum-and-shiso-yamatabi084:0~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care|great-wash-outdoor-detergent-yamatabi086:0~all|すべての商品|All products' | split: '~'
+  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6267810|タオル|Towels~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies|ziploc-screw-lock-cozy-730ml-yamatabi021:1~7216890|テーブル|Tables|ul-multi-table-cle001:0~7216829|マット|Mats|ul-closed-cell-mat-180cm-5mm-maru004:0~tent|テント|Tents|air-float-1p-vestibule-fly-yamatabi128:1~6530746|トレッキングポール|Poles~7216875|行動食|Trail food|umeraru-nanko-plum-and-shiso-yamatabi084:0~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care|great-wash-outdoor-detergent-yamatabi086:0~all|すべての商品|All products' | split: '~'
 -%}
 <section class="yt-nav" aria-label="{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}">
   <form class="yt-nav__s" action="{{ routes.search_url }}" method="get" role="search">
