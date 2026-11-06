@@ -8,7 +8,7 @@
 <section class="yt-nav" aria-label="{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}">
   <form class="yt-nav__s" action="{{ routes.search_url }}" method="get" role="search">
     <input type="search" name="q" placeholder="{% if en %}Search products{% else %}商品をさがす（例：てぶくろ・メリノ・ザック）{% endif %}" aria-label="{% if en %}Search{% else %}検索{% endif %}" autocomplete="off">
-    <input type="hidden" name="type" value="product"><input type="hidden" name="options[prefix]" value="last">
+    <input type="hidden" name="type" value="product"><input type="hidden" name="options[prefix]" value="last"><input type="hidden" name="options[fields]" value="title,product_type,variants.title,vendor,tag">
     <button type="submit" aria-label="{% if en %}Search{% else %}検索{% endif %}">{{- 'icon-search.svg' | inline_asset_content -}}</button>
   </form>
   <ul class="yt-nav__g">
@@ -18,6 +18,7 @@
       {%- assign img = col.image -%}
       {%- unless img -%}
         {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
+        {%- unless img -%}{%- assign img = col.products.first.featured_image -%}{%- endunless -%}
       {%- endunless -%}
       <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
     {%- endfor -%}

@@ -5,7 +5,7 @@ var R=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
 var C={'7216731':'アンダーウェア・タイツ','6267813':'手袋・グローブ','6267814':'帽子','6267815':'腹巻・ネックカバー','middle-outer':'ミドルレイヤー・アウター','6296770':'アクティブインサレーション','6616045':'寒さ対策・保温','6027448':'ベースレイヤー（メリノ）','6027417':'ザック・バッグ','6027423':'サコッシュ・ポーチ','6027418':'財布・ケース','6027415':'スタッフサック','6027416':'ドライバッグ','6027426':'水筒・ボトル','7216829':'マット・パッド','tent':'テント','6027419':'ガイライン・ペグ','6530746':'トレッキングポール','7216858':'クックウェア・食器','6027425':'保温アイテム','7216890':'テーブル','7216875':'行動食・食品','6027687':'ウェアのお手入れ（洗剤）','6267810':'タオル','7216860':'歯ブラシ・バーム','7216863':'エマージェンシーキット','7216861':'キーホルダー・ステッカー','7481185':'扇子','7487521':'指輪','6027456':'ダイニーマ','6027457':'X-Pac','6267817':'ポーラテック','6027459':'メリノウール','6402900':'Ridge Merino','7234547':'Rab'};
 var SYN=[
  [['アンダーウェア','アンダー','シタギ','下着','インナー','ボクサー','ブリーフ','ショーツ','トランクス','パンツ'],['アンダーウェア','ボクサー','ブリーフ','ショーツ'],['7216731']],
- [['テブクロ','手袋','グローブ','ミトン'],['グローブ','ミトン','手袋'],['6267813']],
+ [['テブクロ','手袋','グローブ','ミトン'],['グローブ','ミトン'],['6267813']],
  [['ボウシ','帽子','キャップ','ハット','ニットボウ','ニット帽','ビーニー'],['キャップ','ハット','ニット帽','ビーニー','ヘッドバンド','サンシェード'],['6267814']],
  [['ネックウォーマー','ネックゲイター','ネック','腹巻','ハラマキ'],['ネックゲイター','腹巻'],['6267815']],
  [['フリース','ボウカン','防寒','アタタカイ','暖かい','温かい','アウター','ジャケット','ミドルレイヤー','インサレーション'],['フリース','パワーウール','アルファダイレクト','ジャケット','フーディ'],['middle-outer','6296770','6616045']],
@@ -48,7 +48,7 @@ function expand(q){
   q=String(q||'').trim();var k=N(q);if(!k)return null;var terms=[],cats=[];
   SYN.forEach(function(r){if(r[3].some(function(w){return (k.length>=2&&w.indexOf(k)===0)||k.indexOf(w)>=0})){r[1].forEach(function(t){if(terms.indexOf(t)<0)terms.push(t)});r[2].forEach(function(c){if(cats.indexOf(c)<0)cats.push(c)})}});
   var base=[q];var kq=kata(q);if(kq!==q)base.push(kq);
-  if(terms.length){var hasKana=/[ぁ-ゖ]/.test(q);terms=(hasKana?[]:[q]).concat(terms)}else terms=base;
+  if(!terms.length)terms=base;
   var uniq=[];terms.forEach(function(t){if(uniq.indexOf(t)<0)uniq.push(t)});
   return {q:q,query:uniq.length>1?uniq.join(' OR '):uniq[0],cats:cats,changed:uniq.length>1||uniq[0]!==q};
 }
@@ -56,9 +56,9 @@ window.ytExpand=expand;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function yen(c){return '¥'+Math.round(c/100).toLocaleString('ja-JP')}
 function short(n){return String(n).split(/[（(]/)[0].trim()}
-function url(x){var u=R+'search?q='+encodeURIComponent(x.query)+'&type=product&options%5Bprefix%5D=last';if(x.changed)u+='&yq='+encodeURIComponent(x.q);return u}
+function url(x){var u=R+'search?q='+encodeURIComponent(x.query)+'&type=product&options%5Bprefix%5D=last&options%5Bfields%5D=title%2Cproduct_type%2Cvariants.title%2Cvendor%2Ctag';if(x.changed)u+='&yq='+encodeURIComponent(x.q);return u}
 var cache={};
-function fetchP(x){var key=x.query;if(cache[key])return cache[key];return cache[key]=fetch(R+'search?q='+encodeURIComponent(x.query)+'&type=product&options%5Bprefix%5D=last&view=yt',{credentials:'same-origin'}).then(function(r){return r.text()}).then(function(t){return JSON.parse(t.slice(t.indexOf('{')))}).catch(function(){delete cache[key];return {n:0,p:[]}})}
+function fetchP(x){var key=x.query;if(cache[key])return cache[key];return cache[key]=fetch(R+'search?q='+encodeURIComponent(x.query)+'&type=product&options%5Bprefix%5D=last&options%5Bfields%5D=title%2Cproduct_type%2Cvariants.title%2Cvendor%2Ctag&view=yt',{credentials:'same-origin'}).then(function(r){return r.text()}).then(function(t){return JSON.parse(t.slice(t.indexOf('{')))}).catch(function(){delete cache[key];return {n:0,p:[]}})}
 var st=document.createElement('style');st.textContent='.yt-sg{position:absolute;left:0;right:0;top:100%;margin-top:6px;background:#fff;border:1px solid #e6e1d8;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.12);z-index:1000;max-height:70vh;overflow:auto;text-align:left}.yt-sg a{display:flex;align-items:center;gap:10px;padding:8px 12px;color:#1b1b19;text-decoration:none;font-size:1.3rem;line-height:1.4}.yt-sg a:hover,.yt-sg a.on{background:#F4F0E8}.yt-sg img,.yt-sg i{width:44px;height:44px;object-fit:cover;border-radius:6px;flex:none;background:#f4f0e8}.yt-sg .p{margin-left:auto;font-weight:700;white-space:nowrap}.yt-sg .so{color:#999;font-size:1.1rem;margin-left:6px}.yt-sg .c{font-weight:700}.yt-sg .c:before{content:"カテゴリ";font-size:1rem;background:#1b1b19;color:#fff;border-radius:4px;padding:2px 6px;margin-right:4px;font-weight:700}.yt-sg .all{justify-content:center;font-weight:700;color:#E08A1E;border-top:1px solid #eee}.yt-sg .no{padding:12px;font-size:1.3rem;color:#6b665e}predictive-search .predictive-search{display:none!important}';document.head.appendChild(st);
 function attach(inp){
   if(inp.getAttribute('data-ytsg'))return;inp.setAttribute('data-ytsg','1');inp.setAttribute('autocomplete','off');
