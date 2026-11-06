@@ -3,7 +3,7 @@
   if request.locale.iso_code == 'en'
     assign en = true
   endif
-  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies~7216890|テーブル|Tables~7216829|マット|Mats~tent|テント|Tents~6530746|トレッキングポール|Poles~7216875|行動食|Trail food~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care~all|すべての商品|All products' | split: '~'
+  assign rows = '6027448|ベースレイヤー|Base layers~middle-outer|防寒ウェア|Warm layers~7216731|アンダーウェア|Underwear~6267814|帽子|Hats~6267813|手袋|Gloves~6267810|タオル|Towels~6027423|サコッシュ・ポーチ|Sacoches~6027418|財布・ケース|Wallets~6027415|スタッフサック|Stuff sacks~6027416|ドライバッグ|Dry bags~6027417|ザック|Packs~7216858|食器・カトラリー|Cookware~6027425|保温コジー|Cozies~7216890|テーブル|Tables~7216829|マット|Mats~tent|テント|Tents~6530746|トレッキングポール|Poles~7216875|行動食|Trail food~6027426|ボトル|Bottles~6027687|ウェア用洗剤|Wash care~all|すべての商品|All products' | split: '~'
 -%}
 <section class="yt-nav" aria-label="{% if en %}Shop by category{% else %}カテゴリーから探す{% endif %}">
   <form class="yt-nav__s" action="{{ routes.search_url }}" method="get" role="search">
@@ -53,7 +53,7 @@
 .yt-nav__w.is-moved~.x,.yt-nav.is-moved .yt-nav__hint{opacity:.5}
 @media (prefers-reduced-motion:reduce){.yt-nav__hint i{animation:none}}
 @media (min-width:990px){.yt-nav__hd{display:none}.yt-nav__w{margin:0}.yt-nav__w .yt-nav__g{padding:0}.yt-nav__w:after{display:none}}
-@media (min-width:990px){.yt-nav{padding:28px 32px 12px}.yt-nav__s{max-width:640px;margin:0 auto 22px;height:52px}.yt-nav__g{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(10,1fr);overflow:visible;gap:20px 12px}.yt-nav__ic{width:76px;height:76px}.yt-nav__t{font-size:1.25rem}}
+@media (min-width:990px){.yt-nav{padding:28px 32px 12px}.yt-nav__s{max-width:640px;margin:0 auto 22px;height:52px}.yt-nav__g{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(7,1fr);overflow:visible;gap:20px 12px}.yt-nav__ic{width:76px;height:76px}.yt-nav__t{font-size:1.25rem}}
 </style>
 {% schema %}
 {"name":"カテゴリーナビ（検索つき）","settings":[],"presets":[{"name":"カテゴリーナビ（検索つき）"}]}
