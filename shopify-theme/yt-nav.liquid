@@ -23,7 +23,6 @@
       {%- for p in col.products limit: 8 -%}{%- if p.available and p.featured_image -%}{%- assign img = p.featured_image -%}{%- break -%}{%- endif -%}{%- endfor -%}
       {%- endunless -%}
       {%- unless img -%}{%- assign img = col.products.first.featured_image | default: col.image -%}{%- endunless -%}
-      {%- endunless -%}
       <li><a href="{{ col.url | default: '/collections/all' }}"><span class="yt-nav__ic">{%- if img -%}<img src="{{ img | image_url: width: 160 }}" srcset="{{ img | image_url: width: 120 }} 120w, {{ img | image_url: width: 160 }} 160w" sizes="72px" alt="" width="160" height="160" loading="{% if forloop.index < 9 %}eager{% else %}lazy{% endif %}" decoding="async">{%- endif -%}</span><span class="yt-nav__t">{% if en %}{{ x[2] }}{% else %}{{ x[1] }}{% endif %}</span></a></li>
     {%- endfor -%}
   </ul>
